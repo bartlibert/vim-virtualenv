@@ -1,13 +1,6 @@
-if has('python3')
-    python3 import sys, vim
-    python3 if vim.eval('expand("<sfile>:p:h")') not in sys.path: sys.path.append(vim.eval('expand("<sfile>:p:h")'))
-    python3 import pyvenv
-endif
-if has('python')
-    python import sys, vim
-    python if vim.eval('expand("<sfile>:p:h")') not in sys.path: sys.path.append(vim.eval('expand("<sfile>:p:h")'))
-    python import pyvenv
-endif
+pythonx import sys, vim
+pythonx if vim.eval('expand("<sfile>:p:h")') not in sys.path: sys.path.append(vim.eval('expand("<sfile>:p:h")'))
+pythonx import pyvenv
 
 function! virtualenv#activate(...)
     let name   = a:0 > 0 ? a:1 : ''
@@ -44,12 +37,7 @@ function! virtualenv#activate(...)
 
     let s:prev_path = $PATH
 
-    if has('python')
-        python pyvenv.activate(vim.eval('l:env_dir'))
-    endif
-    if has('python3')
-        python3 pyvenv.activate(vim.eval('l:env_dir'))
-    endif
+    pythonx pyvenv.activate(vim.eval('l:env_dir'))
 
     let g:virtualenv_name = name
     let $VIRTUAL_ENV = env_dir
@@ -60,12 +48,7 @@ function! virtualenv#activate(...)
 endfunction
 
 function! virtualenv#deactivate()
-    if has('python')
-        python pyvenv.deactivate()
-    endif
-    if has('python3')
-        python3 pyvenv.deactivate()
-    endif
+    pythonx pyvenv.deactivate()
 
     unlet! g:virtualenv_name
 
